@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   Shield, Globe, Phone, ArrowRight, BookOpen, Bot,
   Building2, Users, Award, TrendingUp, TriangleAlert, HardHat,
@@ -33,12 +34,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-[60px]">
             {/* Logo */}
-            <a href="/" className="flex items-center gap-2.5 flex-shrink-0">
+            <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(135deg, #03ADB4, #028E95)" }}>
                 <Shield className="w-4 h-4 text-white" strokeWidth={2.5} />
               </div>
               <span className="font-extrabold text-[1rem] tracking-tight" style={{ color: navy }}>MANOSH</span>
-            </a>
+            </Link>
 
             {/* Nav */}
             <nav className="hidden lg:flex items-center gap-0.5">
