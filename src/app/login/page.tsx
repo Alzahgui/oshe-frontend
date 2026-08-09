@@ -2,7 +2,7 @@
 'use client'
 
 import {
-  Shield, Globe,
+  Shield,
   Building2, Users, Award, HardHat, ChevronRight,
 } from 'lucide-react'
 import { LoginForm } from '@/components/LoginForm'
@@ -54,7 +54,7 @@ export default function LoginPage() {
                 className="text-[0.6rem] font-medium tracking-wider"
                 style={{ color: 'rgba(255,255,255,0.45)' }}
               >
-                MONGOLIA OSH ASSOCIATION
+                МОНГОЛЫН ХАБЭА-ИЙН ХОЛБОО
               </div>
             </div>
           </div>
@@ -76,7 +76,7 @@ export default function LoginPage() {
                 className="text-[0.72rem] font-bold tracking-wider"
                 style={{ color: teal }}
               >
-                MEMBER PORTAL
+                ГИШҮҮНИЙ ПОРТАЛ
               </span>
             </div>
 
@@ -84,7 +84,7 @@ export default function LoginPage() {
               className="font-extrabold text-white leading-tight mb-4"
               style={{ fontSize: 'clamp(2rem,3vw,2.75rem)' }}
             >
-              Building{' '}
+              Монгол даяар{' '}
               <span
                 style={{
                   background: 'linear-gradient(135deg, #03ADB4 0%, #FD2EBB 100%)',
@@ -92,16 +92,16 @@ export default function LoginPage() {
                   WebkitTextFillColor: 'transparent',
                 }}
               >
-                Safer Workplaces
+                Аюулгүй ажлын байр
               </span>{' '}
-              Across Mongolia
+              бүтээж байна
             </h1>
             <p
               className="leading-relaxed max-w-md"
               style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem' }}
             >
-              Access your OSH dashboard, compliance reports, training certificates, and
-              AI-powered safety tools — all in one secure portal.
+              ХАБЭА хяналтын самбар, нийцлийн тайлан, сургалтын гэрчилгээ, AI технологи
+              ашигласан аюулгүй ажиллагааны хэрэгслүүддээ нэг найдвартай порталаас хандаарай.
             </p>
 
             {/* Stats */}
@@ -112,21 +112,21 @@ export default function LoginPage() {
                   bg: 'rgba(3,173,180,0.12)',
                   border: 'rgba(3,173,180,0.2)',
                   value: '2,847+',
-                  label: 'Member Companies',
+                  label: 'Гишүүн байгууллага',
                 },
                 {
                   icon: <Users className="w-4 h-4" style={{ color: pink }} />,
                   bg: 'rgba(253,46,187,0.12)',
                   border: 'rgba(253,46,187,0.2)',
                   value: '47,000+',
-                  label: 'Workers Protected',
+                  label: 'Хамгаалагдсан ажилчин',
                 },
                 {
                   icon: <Award className="w-4 h-4" style={{ color: teal }} />,
                   bg: 'rgba(3,173,180,0.12)',
                   border: 'rgba(3,173,180,0.2)',
                   value: '98.2%',
-                  label: 'Compliance Rate',
+                  label: 'Нийцлийн түвшин',
                 },
               ].map((s, i) => (
                 <div
@@ -157,9 +157,9 @@ export default function LoginPage() {
           {/* Feature pills */}
           <div className="flex flex-wrap gap-2 pb-2">
             {[
-              { icon: <HardHat className="w-3 h-3" />, label: 'ISO 45001 Compliance' },
-              { icon: <Shield className="w-3 h-3" />, label: 'Safety Audits' },
-              { icon: <Award className="w-3 h-3" />, label: 'Certifications' },
+              { icon: <HardHat className="w-3 h-3" />, label: 'ISO 45001 Нийцэл' },
+              { icon: <Shield className="w-3 h-3" />, label: 'Аюулгүйн аудит' },
+              { icon: <Award className="w-3 h-3" />, label: 'Гэрчилгээ' },
             ].map((f, i) => (
               <span
                 key={i}
@@ -198,7 +198,7 @@ export default function LoginPage() {
               className="text-[0.6rem] font-medium tracking-wider"
               style={{ color: '#6B7C93' }}
             >
-              MONGOLIA OSH ASSOCIATION
+              МОНГОЛЫН ХАБЭА-ИЙН ХОЛБОО
             </div>
           </div>
         </div>
@@ -210,10 +210,10 @@ export default function LoginPage() {
               className="font-extrabold text-[1.75rem] leading-tight mb-2"
               style={{ color: navy }}
             >
-              Welcome back
+              Тавтай морилно уу
             </h2>
             <p className="text-[0.9rem]" style={{ color: '#6B7C93' }}>
-              Sign in to your MANOSH member portal
+              MANOSH гишүүний порталд нэвтрэх
             </p>
           </div>
 
@@ -224,7 +224,7 @@ export default function LoginPage() {
           <div className="flex items-center gap-3 my-6">
             <div className="flex-1 h-px" style={{ background: 'rgba(11,22,40,0.1)' }} />
             <span className="text-[0.75rem] font-medium" style={{ color: '#6B7C93' }}>
-              or
+              эсвэл
             </span>
             <div className="flex-1 h-px" style={{ background: 'rgba(11,22,40,0.1)' }} />
           </div>
@@ -232,9 +232,9 @@ export default function LoginPage() {
 
           {/* Register */}
           <p className="text-center text-[0.82rem] mt-6" style={{ color: '#6B7C93' }}>
-            Not a member yet?{' '}
+            Гишүүн болоогүй байна уу?{' '}
             <a href="#" className="font-bold hover:underline" style={{ color: teal }}>
-              Apply for membership <ChevronRight className="w-3 h-3 inline-block -mt-0.5" />
+              Гишүүнчлэлд хамрагдах <ChevronRight className="w-3 h-3 inline-block -mt-0.5" />
             </a>
           </p>
 
@@ -244,13 +244,13 @@ export default function LoginPage() {
               className="text-center text-[0.72rem] leading-relaxed"
               style={{ color: '#6B7C93' }}
             >
-              Protected by ISO 45001-compliant security standards.
+              ISO 45001 стандартын дагуу хамгаалагдсан.
               <br />
-              Need help?{' '}
+              Тусламж хэрэгтэй юу?{' '}
               <a href="#" className="font-semibold hover:underline" style={{ color: teal }}>
-                Contact support
+                Дэмжлэгтэй холбогдох
               </a>{' '}
-              or call{' '}
+              эсвэл залгах{' '}
               <span style={{ color: navy, fontWeight: 600 }}>+976 11-329-000</span>
             </p>
           </div>

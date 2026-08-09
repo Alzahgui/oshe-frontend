@@ -2,90 +2,86 @@
 
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { api, setAxiosToken } from '@/lib/axios'
-import type { AuthState, AuthResponse, MeResponse } from '@/types/auth'
+import { api, ensureCsrfCookie } from '@/lib/axios'
+import type { AuthState, LaravelUser, User } from '@/types/auth'
 
-function setCookie(token: string) {
-  if (typeof document === 'undefined') return
-  document.cookie = `access_token=${token}; path=/; max-age=604800; SameSite=Lax`
+const AUTH_COOKIE_MAX_AGE = 60 * 60 * 2 // matches Laravel's default 120-minute session lifetime
+
+function normalizeUser(raw: LaravelUser): User {
+  const [first_name, ...rest] = raw.name.trim().split(/\s+/)
+  return {
+    id: raw.id,
+    email: raw.email,
+    first_name: first_name ?? raw.name,
+    last_name: rest.join(' '),
+    is_active: true,
+    is_superuser: false,
+    roles: [],
+  }
 }
 
-function clearCookie() {
+function setAuthenticatedCookie() {
   if (typeof document === 'undefined') return
-  document.cookie = 'access_token=; path=/; max-age=0'
+  document.cookie = `authenticated=1; path=/; max-age=${AUTH_COOKIE_MAX_AGE}; SameSite=Lax`
+}
+
+function clearAuthenticatedCookie() {
+  if (typeof document === 'undefined') return
+  document.cookie = 'authenticated=; path=/; max-age=0'
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       user: null,
-      accessToken: null,
       permissions: [],
       menu: [],
       isAuthenticated: false,
 
       login: async (email, password) => {
-        // 1. Obtain tokens
-        const { data: tokens } = await api.post<AuthResponse>('/auth/login/', {
-          email,
-          password,
-        })
+        await ensureCsrfCookie()
+        await api.post('/api/login', { email, password })
 
-        // 2. Persist refresh token and wire up axios
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('refresh_token', tokens.refresh)
-        }
-        setAxiosToken(tokens.access)
-        setCookie(tokens.access)
-
-        // 3. Fetch authenticated user details
-        const { data: me } = await api.get<MeResponse>('/auth/me/')
+        const { data } = await api.get<LaravelUser>('/api/user')
 
         set({
-          user: me.user,
-          accessToken: tokens.access,
-          permissions: me.permissions,
-          menu: me.menu,
+          user: normalizeUser(data),
+          permissions: [],
+          menu: [],
           isAuthenticated: true,
         })
+        setAuthenticatedCookie()
       },
 
       logout: async () => {
         try {
-          const refresh =
-            typeof window !== 'undefined' ? localStorage.getItem('refresh_token') : null
-          if (refresh) {
-            await api.post('/auth/logout/', { refresh })
-          }
+          await api.post('/api/logout')
         } catch {
           // swallow — we still clear local state
         } finally {
-          if (typeof window !== 'undefined') {
-            localStorage.removeItem('refresh_token')
-          }
-          setAxiosToken(null)
-          clearCookie()
-          set({
-            user: null,
-            accessToken: null,
-            permissions: [],
-            menu: [],
-            isAuthenticated: false,
-          })
+          clearAuthenticatedCookie()
+          set({ user: null, permissions: [], menu: [], isAuthenticated: false })
         }
       },
 
-      setAccessToken: (token) => {
-        set({ accessToken: token })
-        setAxiosToken(token)
-        setCookie(token)
+      clearSession: () => {
+        clearAuthenticatedCookie()
+        set({ user: null, permissions: [], menu: [], isAuthenticated: false })
       },
 
-      initialize: () => {
-        const { accessToken } = get()
-        if (accessToken) {
-          setAxiosToken(accessToken)
-          setCookie(accessToken)
+      initialize: async () => {
+        try {
+          const { data } = await api.get<LaravelUser>('/api/user')
+          set({
+            user: normalizeUser(data),
+            permissions: [],
+            menu: [],
+            isAuthenticated: true,
+          })
+          setAuthenticatedCookie()
+        } catch {
+          clearAuthenticatedCookie()
+          set({ user: null, permissions: [], menu: [], isAuthenticated: false })
         }
       },
     }),
@@ -104,17 +100,10 @@ export const useAuthStore = create<AuthState>()(
       }),
       partialize: (state) => ({
         user: state.user,
-        accessToken: state.accessToken,
         permissions: state.permissions,
         menu: state.menu,
         isAuthenticated: state.isAuthenticated,
       }),
-      onRehydrateStorage: () => (state) => {
-        if (state?.accessToken) {
-          setAxiosToken(state.accessToken)
-          setCookie(state.accessToken)
-        }
-      },
     }
   )
 )

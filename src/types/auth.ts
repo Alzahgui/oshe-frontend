@@ -33,25 +33,21 @@ export interface User {
   roles: Role[]
 }
 
-export interface AuthResponse {
-  access: string
-  refresh: string
-}
-
-export interface MeResponse {
-  user: User
-  permissions: string[]
-  menu: MenuItem[]
+/** Raw shape returned by Laravel's GET /api/user */
+export interface LaravelUser {
+  id: number
+  name: string
+  email: string
 }
 
 export interface AuthState {
   user: User | null
-  accessToken: string | null
   permissions: string[]
   menu: MenuItem[]
   isAuthenticated: boolean
   login: (email: string, password: string) => Promise<void>
   logout: () => Promise<void>
-  setAccessToken: (token: string) => void
-  initialize: () => void
+  /** Clears local auth state without hitting the server — used when a 401 reveals the session already expired */
+  clearSession: () => void
+  initialize: () => Promise<void>
 }

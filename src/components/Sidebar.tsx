@@ -16,6 +16,20 @@ import {
   BarChart3,
   Bell,
   HardHat,
+  Megaphone,
+  Menu as MenuIcon,
+  Award,
+  Target,
+  Newspaper,
+  Bot,
+  Star,
+  Building2,
+  Layers,
+  Scale,
+  Activity,
+  TrendingDown,
+  TriangleAlert,
+  Calendar,
 } from 'lucide-react'
 import { useAuthStore } from '@/store/authStore'
 import type { MenuItem } from '@/types/auth'
@@ -30,6 +44,22 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string; strokeW
   settings: Settings,
   analytics: BarChart3,
   notifications: Bell,
+  content: Layers,
+  legal: Scale,
+  announcements: Megaphone,
+  'nav-menus': MenuIcon,
+  'hero-stats': Award,
+  'quick-access-cards': Target,
+  'news-articles': Newspaper,
+  'ai-features': Bot,
+  testimonials: Star,
+  partners: Building2,
+  'footer-link-groups': Layers,
+  'law-documents': Scale,
+  'safety-metrics': Activity,
+  'safety-trends': TrendingDown,
+  'industry-risks': TriangleAlert,
+  events: Calendar,
 }
 
 const FALLBACK_NAV: MenuItem[] = [
@@ -37,6 +67,30 @@ const FALLBACK_NAV: MenuItem[] = [
   { id: 2, label: 'Users', path: '/users', order: 2, icon: 'users' },
   { id: 3, label: 'Posts', path: '/posts', order: 3, icon: 'posts' },
   { id: 4, label: 'Settings', path: '/settings', order: 4, icon: 'settings' },
+  {
+    id: 10, label: 'Нүүр хуудасны контент', order: 5, icon: 'content',
+    children: [
+      { id: 11, label: 'Зарлалууд', path: '/announcements', order: 1, icon: 'announcements' },
+      { id: 12, label: 'Навигацийн цэс', path: '/nav-menus', order: 2, icon: 'nav-menus' },
+      { id: 13, label: 'Hero статистик', path: '/hero-stats', order: 3, icon: 'hero-stats' },
+      { id: 14, label: 'Түргэн хандалт', path: '/quick-access-cards', order: 4, icon: 'quick-access-cards' },
+      { id: 15, label: 'Мэдээ', path: '/news-articles', order: 5, icon: 'news-articles' },
+      { id: 16, label: 'AI боломж', path: '/ai-features', order: 6, icon: 'ai-features' },
+      { id: 17, label: 'Сэтгэгдэл', path: '/testimonials', order: 7, icon: 'testimonials' },
+      { id: 18, label: 'Түнш байгууллага', path: '/partners', order: 8, icon: 'partners' },
+      { id: 19, label: 'Footer холбоос', path: '/footer-link-groups', order: 9, icon: 'footer-link-groups' },
+    ],
+  },
+  {
+    id: 20, label: 'Хууль ба статистик', order: 6, icon: 'legal',
+    children: [
+      { id: 21, label: 'Хууль, стандарт', path: '/law-documents', order: 1, icon: 'law-documents' },
+      { id: 22, label: 'Статистикийн үзүүлэлт', path: '/safety-metrics', order: 2, icon: 'safety-metrics' },
+      { id: 23, label: 'Ослын статистик', path: '/safety-trends', order: 3, icon: 'safety-trends' },
+      { id: 24, label: 'Салбарын эрсдэл', path: '/industry-risks', order: 4, icon: 'industry-risks' },
+      { id: 25, label: 'Арга хэмжээ', path: '/events', order: 5, icon: 'events' },
+    ],
+  },
 ]
 
 interface NavItemProps {

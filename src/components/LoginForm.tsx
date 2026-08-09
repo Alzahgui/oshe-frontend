@@ -39,10 +39,12 @@ export function LoginForm() {
       await login(email, password)
       router.push('/dashboard')
     } catch (err: unknown) {
-      const msg =
-        (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail ??
-        'Invalid credentials. Please try again.'
-      setServerError(msg)
+      const data = (err as { response?: { data?: {
+        message?: string
+        errors?: Record<string, string[]>
+      } } })?.response?.data
+      const firstFieldError = data?.errors && Object.values(data.errors)[0]?.[0]
+      setServerError(data?.message ?? firstFieldError ?? 'Invalid credentials. Please try again.')
     }
   }
 
