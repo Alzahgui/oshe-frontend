@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -63,10 +63,10 @@ jobs:
       image: ${{ steps.meta.outputs.image }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Log in to GHCR
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -75,11 +75,12 @@ jobs:
       - name: Set image tag
         id: meta
         run: |
-          IMAGE="${REGISTRY}/${IMAGE_NAME,,}:${GITHUB_SHA::7}"
-          echo "image=$IMAGE" >> "$GITHUB_OUTPUT"
+          REPO_LC="${IMAGE_NAME,,}"
+          echo "repo_lc=$REPO_LC" >> "$GITHUB_OUTPUT"
+          echo "image=${REGISTRY}/${REPO_LC}:${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
 
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: true
@@ -87,7 +88,7 @@ jobs:
             NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
           tags: |
             ${{ steps.meta.outputs.image }}
-            ${{ env.REGISTRY }}/${{ github.repository }}:latest
+            ${{ env.REGISTRY }}/${{ steps.meta.outputs.repo_lc }}:latest
 
   deploy:
     name: Deploy to VPS
@@ -95,7 +96,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Copy docker-compose.yml to VPS
         uses: appleboy/scp-action@v0.1.7
