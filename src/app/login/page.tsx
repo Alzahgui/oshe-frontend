@@ -1,6 +1,7 @@
 // ── src/app/(auth)/login/page.tsx ─────────────────────────────────────────
 'use client'
 
+import Image from 'next/image'
 import {
   Shield,
   Building2, Users, Award, HardHat, ChevronRight,
@@ -42,12 +43,13 @@ export default function LoginPage() {
         <div className="relative flex flex-col h-full px-12 py-10">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md"
-              style={{ background: 'linear-gradient(135deg, #03ADB4, #028E95)' }}
-            >
-              <Shield className="w-5 h-5 text-white" strokeWidth={2.5} />
-            </div>
+            <Image
+              src="/logo.jpg"
+              alt="Logo"
+              width={40}
+              height={40}
+              className="w-10 h-10 rounded-xl object-cover shadow-md flex-shrink-0"
+            />
             <div>
               <div className="font-extrabold text-[1.1rem] leading-tight text-white">MANOSH</div>
               <div
@@ -184,12 +186,13 @@ export default function LoginPage() {
       >
         {/* Mobile logo */}
         <div className="flex lg:hidden items-center gap-3 mb-10">
-          <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, #03ADB4, #028E95)' }}
-          >
-            <Shield className="w-5 h-5 text-white" strokeWidth={2.5} />
-          </div>
+          <Image
+            src="/logo.jpg"
+            alt="Logo"
+            width={40}
+            height={40}
+            className="w-10 h-10 rounded-xl object-cover flex-shrink-0"
+          />
           <div>
             <div className="font-extrabold text-[1.1rem] leading-tight" style={{ color: navy }}>
               MANOSH

@@ -37,7 +37,10 @@ export function LoginForm() {
     setServerError('')
     try {
       await login(email, password)
-      router.push('/dashboard')
+      // Admin/superusers go to the admin panel; regular members go to their portal
+      const freshUser = useAuthStore.getState().user
+      const isAdmin = freshUser?.is_superuser || freshUser?.roles.some((r) => r.name === 'Admin')
+      router.push(isAdmin ? '/dashboard' : '/portal')
     } catch (err: unknown) {
       const data = (err as { response?: { data?: {
         message?: string

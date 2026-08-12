@@ -3,185 +3,144 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { useState } from 'react'
 import {
+  Shield,
   LayoutDashboard,
   Users,
-  FileText,
   Settings,
-  ChevronDown,
-  ChevronRight,
-  Shield,
-  LogOut,
-  BarChart3,
   Bell,
-  HardHat,
-  Megaphone,
-  Menu as MenuIcon,
-  Award,
-  Target,
+  Menu,
+  BarChart3,
+  Zap,
   Newspaper,
-  Bot,
-  Star,
-  Building2,
-  Layers,
   Scale,
   Activity,
-  TrendingDown,
+  TrendingUp,
   TriangleAlert,
   Calendar,
+  Bot,
+  Star,
+  Globe,
+  Link2,
+  LogOut,
 } from 'lucide-react'
 import { useAuthStore } from '@/store/authStore'
-import type { MenuItem } from '@/types/auth'
 
 const teal = '#03ADB4'
 const navy = '#0B1628'
 
-const ICON_MAP: Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
-  dashboard: LayoutDashboard,
-  users: Users,
-  posts: FileText,
-  settings: Settings,
-  analytics: BarChart3,
-  notifications: Bell,
-  content: Layers,
-  legal: Scale,
-  announcements: Megaphone,
-  'nav-menus': MenuIcon,
-  'hero-stats': Award,
-  'quick-access-cards': Target,
-  'news-articles': Newspaper,
-  'ai-features': Bot,
-  testimonials: Star,
-  partners: Building2,
-  'footer-link-groups': Layers,
-  'law-documents': Scale,
-  'safety-metrics': Activity,
-  'safety-trends': TrendingDown,
-  'industry-risks': TriangleAlert,
-  events: Calendar,
+// ── Nav section definition ────────────────────────────────────────────────
+
+interface NavLink {
+  label: string
+  path: string
+  Icon: React.ComponentType<{ className?: string }>
 }
 
-const FALLBACK_NAV: MenuItem[] = [
-  { id: 1, label: 'Dashboard', path: '/dashboard', order: 1, icon: 'dashboard' },
-  { id: 2, label: 'Users', path: '/users', order: 2, icon: 'users' },
-  { id: 3, label: 'Posts', path: '/posts', order: 3, icon: 'posts' },
-  { id: 4, label: 'Settings', path: '/settings', order: 4, icon: 'settings' },
+interface NavSection {
+  heading: string
+  items: NavLink[]
+}
+
+const NAV_SECTIONS: NavSection[] = [
   {
-    id: 10, label: 'Нүүр хуудасны контент', order: 5, icon: 'content',
-    children: [
-      { id: 11, label: 'Зарлалууд', path: '/announcements', order: 1, icon: 'announcements' },
-      { id: 12, label: 'Навигацийн цэс', path: '/nav-menus', order: 2, icon: 'nav-menus' },
-      { id: 13, label: 'Hero статистик', path: '/hero-stats', order: 3, icon: 'hero-stats' },
-      { id: 14, label: 'Түргэн хандалт', path: '/quick-access-cards', order: 4, icon: 'quick-access-cards' },
-      { id: 15, label: 'Мэдээ', path: '/news-articles', order: 5, icon: 'news-articles' },
-      { id: 16, label: 'AI боломж', path: '/ai-features', order: 6, icon: 'ai-features' },
-      { id: 17, label: 'Сэтгэгдэл', path: '/testimonials', order: 7, icon: 'testimonials' },
-      { id: 18, label: 'Түнш байгууллага', path: '/partners', order: 8, icon: 'partners' },
-      { id: 19, label: 'Footer холбоос', path: '/footer-link-groups', order: 9, icon: 'footer-link-groups' },
+    heading: 'OVERVIEW',
+    items: [
+      { label: 'Dashboard',  path: '/dashboard', Icon: LayoutDashboard },
+      { label: 'Users',      path: '/users',     Icon: Users },
     ],
   },
   {
-    id: 20, label: 'Хууль ба статистик', order: 6, icon: 'legal',
-    children: [
-      { id: 21, label: 'Хууль, стандарт', path: '/law-documents', order: 1, icon: 'law-documents' },
-      { id: 22, label: 'Статистикийн үзүүлэлт', path: '/safety-metrics', order: 2, icon: 'safety-metrics' },
-      { id: 23, label: 'Ослын статистик', path: '/safety-trends', order: 3, icon: 'safety-trends' },
-      { id: 24, label: 'Салбарын эрсдэл', path: '/industry-risks', order: 4, icon: 'industry-risks' },
-      { id: 25, label: 'Арга хэмжээ', path: '/events', order: 5, icon: 'events' },
+    heading: 'НҮҮР ХУУДАС',
+    items: [
+      { label: 'Мэдэгдлүүд',             path: '/announcements',     Icon: Bell },
+      { label: 'Навигаци',               path: '/nav-menus',         Icon: Menu },
+      { label: 'Hero статистик',          path: '/hero-stats',        Icon: BarChart3 },
+      { label: 'Хурдан нэвтрэх картууд', path: '/quick-access-cards', Icon: Zap },
+      { label: 'Мэдээ нийтлэлүүд',       path: '/news-articles',     Icon: Newspaper },
+    ],
+  },
+  {
+    heading: 'ХУУЛИЙН МЭДЭЭЛЭЛ',
+    items: [
+      { label: 'Хуулийн баримтууд', path: '/law-documents', Icon: Scale },
+    ],
+  },
+  {
+    heading: 'СТАТИСТИК',
+    items: [
+      { label: 'Аюулгүйн үзүүлэлт',    path: '/safety-metrics', Icon: Activity },
+      { label: 'Аюулгүйн чиг хандлага', path: '/safety-trends',  Icon: TrendingUp },
+      { label: 'Салбарын эрсдэл',        path: '/industry-risks', Icon: TriangleAlert },
+    ],
+  },
+  {
+    heading: 'СУРГАЛТ',
+    items: [
+      { label: 'Арга хэмжээнүүд', path: '/events', Icon: Calendar },
+    ],
+  },
+  {
+    heading: 'ХИЙМЭЛ ОЮУН',
+    items: [
+      { label: 'AI онцлогууд', path: '/ai-features', Icon: Bot },
+    ],
+  },
+  {
+    heading: 'БРЭНД',
+    items: [
+      { label: 'Гэрчлэлүүд',              path: '/testimonials',      Icon: Star },
+      { label: 'Партнерууд',              path: '/partners',           Icon: Globe },
+      { label: 'Хөл хэсгийн холбоосууд', path: '/footer-link-groups', Icon: Link2 },
+    ],
+  },
+  {
+    heading: 'ТОХИРГОО',
+    items: [
+      { label: 'Тохиргоо', path: '/settings', Icon: Settings },
     ],
   },
 ]
 
-interface NavItemProps {
-  item: MenuItem
-  depth?: number
-}
+// ── Single nav item ───────────────────────────────────────────────────────
 
-function NavItem({ item, depth = 0 }: NavItemProps) {
+function NavItem({ label, path, Icon }: NavLink) {
   const pathname = usePathname()
-  const [open, setOpen] = useState(false)
-
-  const hasChildren = (item.children?.length ?? 0) > 0
-  const isActive = item.path
-    ? pathname === item.path || pathname.startsWith(item.path + '/')
-    : false
-
-  const Icon = item.icon ? (ICON_MAP[item.icon] ?? HardHat) : HardHat
-  const indent = depth > 0 ? 12 + depth * 12 : 16
-
-  if (hasChildren) {
-    return (
-      <div>
-        <button
-          onClick={() => setOpen(!open)}
-          className="w-full flex items-center gap-3 py-2.5 rounded-xl text-sm font-medium transition-colors"
-          style={{
-            paddingLeft: `${indent}px`,
-            paddingRight: '12px',
-            color: isActive ? teal : 'rgba(255,255,255,0.7)',
-            background: isActive ? 'rgba(3,173,180,0.15)' : 'transparent',
-          }}
-        >
-          {depth === 0 && <Icon className="w-4 h-4 flex-shrink-0" />}
-          <span className="flex-1 text-left">{item.label}</span>
-          {open ? (
-            <ChevronDown className="w-3.5 h-3.5 opacity-60" />
-          ) : (
-            <ChevronRight className="w-3.5 h-3.5 opacity-60" />
-          )}
-        </button>
-        {open && (
-          <div className="ml-3 border-l" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
-            {item.children!.map((child) => (
-              <NavItem key={child.id} item={child} depth={depth + 1} />
-            ))}
-          </div>
-        )}
-      </div>
-    )
-  }
+  const isActive = pathname === path || pathname.startsWith(path + '/')
 
   return (
     <Link
-      href={item.path ?? '#'}
-      className="flex items-center gap-3 py-2.5 rounded-xl text-sm font-medium transition-colors group"
+      href={path}
+      className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all"
       style={{
-        paddingLeft: `${indent}px`,
-        paddingRight: '12px',
-        color: isActive ? teal : 'rgba(255,255,255,0.7)',
+        color:      isActive ? teal : 'rgba(255,255,255,0.65)',
         background: isActive ? 'rgba(3,173,180,0.15)' : 'transparent',
       }}
+      onMouseEnter={(e) => {
+        if (!isActive) (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)'
+      }}
+      onMouseLeave={(e) => {
+        if (!isActive) (e.currentTarget as HTMLElement).style.background = 'transparent'
+      }}
     >
-      {depth === 0 && <Icon className="w-4 h-4 flex-shrink-0" />}
-      {depth > 0 && (
-        <span
-          className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-          style={{ background: isActive ? teal : 'rgba(255,255,255,0.3)' }}
-        />
-      )}
-      <span>{item.label}</span>
+      <Icon className="w-4 h-4 flex-shrink-0" />
+      <span className="flex-1 truncate">{label}</span>
       {isActive && (
-        <span
-          className="ml-auto w-1.5 h-1.5 rounded-full"
-          style={{ background: teal }}
-        />
+        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: teal }} />
       )}
     </Link>
   )
 }
 
+// ── Sidebar ───────────────────────────────────────────────────────────────
+
 export function Sidebar() {
-  const user = useAuthStore((s) => s.user)
-  const menu = useAuthStore((s) => s.menu)
+  const user   = useAuthStore((s) => s.user)
   const logout = useAuthStore((s) => s.logout)
   const router = useRouter()
 
-  const navItems =
-    menu.length > 0 ? [...menu].sort((a, b) => a.order - b.order) : FALLBACK_NAV
-
   const initials = user
-    ? `${user.first_name.charAt(0)}${user.last_name.charAt(0)}`.toUpperCase()
+    ? `${user.first_name.charAt(0)}${user.last_name ? user.last_name.charAt(0) : ''}`.toUpperCase()
     : 'U'
 
   const handleLogout = async () => {
@@ -203,23 +162,37 @@ export function Sidebar() {
           className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
           style={{ background: 'linear-gradient(135deg, #03ADB4, #028E95)' }}
         >
-          <Shield className="w-4 h-4 text-white" strokeWidth={2.5} />
+          <Shield className="w-5 h-5 text-white" />
         </div>
         <div>
           <div className="font-extrabold text-white text-[0.95rem] leading-tight">MANOSH</div>
           <div
-            className="text-[0.58rem] font-medium tracking-wider"
+            className="text-[0.58rem] font-medium tracking-wider uppercase"
             style={{ color: 'rgba(255,255,255,0.4)' }}
           >
-            ADMIN PORTAL
+            ADMIN ПОРТАЛ
           </div>
         </div>
       </div>
 
       {/* ── Navigation ── */}
-      <nav className="flex-1 overflow-y-auto py-3 px-3 space-y-0.5">
-        {navItems.map((item) => (
-          <NavItem key={item.id} item={item} />
+      <nav className="flex-1 overflow-y-auto py-3 px-3">
+        {NAV_SECTIONS.map((section, si) => (
+          <div key={section.heading} className={si > 0 ? 'mt-5' : ''}>
+            {/* Section heading */}
+            <div
+              className="px-3 mb-1 text-[0.6rem] font-bold tracking-widest"
+              style={{ color: 'rgba(255,255,255,0.28)' }}
+            >
+              {section.heading}
+            </div>
+            {/* Items */}
+            <div className="space-y-0.5">
+              {section.items.map((item) => (
+                <NavItem key={item.path} {...item} />
+              ))}
+            </div>
+          </div>
         ))}
       </nav>
 
@@ -251,8 +224,8 @@ export function Sidebar() {
             className="p-1.5 rounded-lg transition-colors flex-shrink-0"
             style={{ color: 'rgba(255,255,255,0.4)' }}
             title="Sign out"
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#ef4444')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = '#ef4444')}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.4)')}
           >
             <LogOut className="w-3.5 h-3.5" />
           </button>

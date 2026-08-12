@@ -179,9 +179,13 @@ export default function Home() {
           <div className="flex items-center justify-between h-[60px]">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(135deg, #03ADB4, #028E95)" }}>
-                <Shield className="w-4 h-4 text-white" strokeWidth={2.5} />
-              </div>
+              <Image
+                src="/logo.jpg"
+                alt="Logo"
+                width={32}
+                height={32}
+                className="w-8 h-8 rounded-lg object-cover flex-shrink-0"
+              />
               <div>
                 <span className="font-extrabold text-[1rem] tracking-tight block leading-tight" style={{ color: navy }}>{settings?.org_name ?? "Манош"}</span>
                 <span className="text-[0.55rem] font-medium tracking-wider block leading-tight uppercase" style={{ color: "#6B7C93" }}>{settings?.org_full_name ?? "Монголын хөдөлмөрийн холбоо"}</span>
