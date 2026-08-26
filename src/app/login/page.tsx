@@ -78,7 +78,7 @@ export default function LoginPage() {
                 className="text-[0.72rem] font-bold tracking-wider"
                 style={{ color: teal }}
               >
-                ГИШҮҮНИЙ ПОРТАЛ
+                 ПОРТАЛ
               </span>
             </div>
 
