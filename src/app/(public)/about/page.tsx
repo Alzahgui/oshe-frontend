@@ -16,7 +16,7 @@ const STATS = [
 
 export default function AboutPage() {
   return (
-    <div style={{ fontFamily: "var(--font-plus-jakarta), sans-serif" }}>
+    <div style={{ fontFamily: "var(--font-sans-app), sans-serif" }}>
       <title>БИД ҮҮ? — MANOSH</title>
 
       {/* ── Hero ── */}

@@ -139,7 +139,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex" style={{ fontFamily: 'var(--font-plus-jakarta), sans-serif' }}>
+    <div className="min-h-screen flex" style={{ fontFamily: 'var(--font-sans-app), sans-serif' }}>
 
       {/* ── Left panel ── */}
       <div

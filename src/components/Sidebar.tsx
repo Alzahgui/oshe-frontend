@@ -22,9 +22,15 @@ import {
   Star,
   Globe,
   Link2,
+  Key,
+  ListTree,
+  Circle,
   LogOut,
+  type LucideIcon,
 } from 'lucide-react'
 import { useAuthStore } from '@/store/authStore'
+import { usePermission } from '@/hooks/usePermission'
+import type { MenuItem } from '@/types/auth'
 
 const teal = '#03ADB4'
 const navy = '#0B1628'
@@ -34,7 +40,7 @@ const navy = '#0B1628'
 interface NavLink {
   label: string
   path: string
-  Icon: React.ComponentType<{ className?: string }>
+  Icon: LucideIcon
 }
 
 interface NavSection {
@@ -42,65 +48,45 @@ interface NavSection {
   items: NavLink[]
 }
 
-const NAV_SECTIONS: NavSection[] = [
-  {
-    heading: 'OVERVIEW',
-    items: [
-      { label: 'Dashboard',  path: '/dashboard', Icon: LayoutDashboard },
-      { label: 'Users',      path: '/users',     Icon: Users },
-    ],
-  },
-  {
-    heading: 'НҮҮР ХУУДАС',
-    items: [
-      { label: 'Мэдэгдлүүд',             path: '/announcements',     Icon: Bell },
-      { label: 'Навигаци',               path: '/nav-menus',         Icon: Menu },
-      { label: 'Hero статистик',          path: '/hero-stats',        Icon: BarChart3 },
-      { label: 'Хурдан нэвтрэх картууд', path: '/quick-access-cards', Icon: Zap },
-      { label: 'Мэдээ нийтлэлүүд',       path: '/news-articles',     Icon: Newspaper },
-    ],
-  },
-  {
-    heading: 'ХУУЛИЙН МЭДЭЭЛЭЛ',
-    items: [
-      { label: 'Хуулийн баримтууд', path: '/law-documents', Icon: Scale },
-    ],
-  },
-  {
-    heading: 'СТАТИСТИК',
-    items: [
-      { label: 'Аюулгүйн үзүүлэлт',    path: '/safety-metrics', Icon: Activity },
-      { label: 'Аюулгүйн чиг хандлага', path: '/safety-trends',  Icon: TrendingUp },
-      { label: 'Салбарын эрсдэл',        path: '/industry-risks', Icon: TriangleAlert },
-    ],
-  },
-  {
-    heading: 'СУРГАЛТ',
-    items: [
-      { label: 'Арга хэмжээнүүд', path: '/events', Icon: Calendar },
-    ],
-  },
-  {
-    heading: 'ХИЙМЭЛ ОЮУН',
-    items: [
-      { label: 'AI онцлогууд', path: '/ai-features', Icon: Bot },
-    ],
-  },
-  {
-    heading: 'БРЭНД',
-    items: [
-      { label: 'Гэрчлэлүүд',              path: '/testimonials',      Icon: Star },
-      { label: 'Партнерууд',              path: '/partners',           Icon: Globe },
-      { label: 'Хөл хэсгийн холбоосууд', path: '/footer-link-groups', Icon: Link2 },
-    ],
-  },
-  {
-    heading: 'ТОХИРГОО',
-    items: [
-      { label: 'Тохиргоо', path: '/settings', Icon: Settings },
-    ],
-  },
-]
+// Maps the icon name stored on each backend Menu row (e.g. "LayoutDashboard")
+// to its lucide-react component. Falls back to a plain dot for unknown names.
+const ICONS: Record<string, LucideIcon> = {
+  LayoutDashboard, Users, Settings, Bell, Menu, BarChart3, Zap, Newspaper,
+  Scale, Activity, TrendingUp, TriangleAlert, Calendar, Bot, Star, Globe,
+  Link2, Key, ListTree, Shield,
+}
+
+/** True if the current user satisfies a menu item's required_role and required_permissions. */
+function useMenuAccess() {
+  const { hasRole, canAny } = usePermission()
+
+  return (item: MenuItem): boolean => {
+    if (item.required_role && !hasRole(item.required_role)) return false
+    if (item.required_permissions?.length && !canAny(item.required_permissions)) return false
+    return true
+  }
+}
+
+/** Converts the backend's two-level Menu tree (section -> links) into sidebar sections. */
+function useNavSections(): NavSection[] {
+  const menu = useAuthStore((s) => s.menu)
+  const canAccess = useMenuAccess()
+
+  return menu
+    .filter(canAccess)
+    .map((section) => ({
+      heading: section.label,
+      items: (section.children ?? [])
+        .filter(canAccess)
+        .filter((item): item is MenuItem & { path: string } => Boolean(item.path))
+        .map((item) => ({
+          label: item.label,
+          path: item.path,
+          Icon: (item.icon && ICONS[item.icon]) || Circle,
+        })),
+    }))
+    .filter((section) => section.items.length > 0)
+}
 
 // ── Single nav item ───────────────────────────────────────────────────────
 
@@ -138,6 +124,7 @@ export function Sidebar() {
   const user   = useAuthStore((s) => s.user)
   const logout = useAuthStore((s) => s.logout)
   const router = useRouter()
+  const navSections = useNavSections()
 
   const initials = user
     ? `${user.first_name.charAt(0)}${user.last_name ? user.last_name.charAt(0) : ''}`.toUpperCase()
@@ -177,7 +164,7 @@ export function Sidebar() {
 
       {/* ── Navigation ── */}
       <nav className="flex-1 overflow-y-auto py-3 px-3">
-        {NAV_SECTIONS.map((section, si) => (
+        {navSections.map((section, si) => (
           <div key={section.heading} className={si > 0 ? 'mt-5' : ''}>
             {/* Section heading */}
             <div

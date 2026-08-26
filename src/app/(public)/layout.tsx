@@ -7,7 +7,7 @@ const teal = "#03ADB4";
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{ fontFamily: "var(--font-plus-jakarta), sans-serif", background: "#F8FAFC" }}>
+    <div style={{ fontFamily: "var(--font-sans-app), sans-serif", background: "#F8FAFC" }}>
       <PublicHeader />
       <main>{children}</main>
 

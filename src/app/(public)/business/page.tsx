@@ -75,7 +75,7 @@ const SERVICES = [
 
 export default function BusinessPage() {
   return (
-    <div style={{ fontFamily: "var(--font-plus-jakarta), sans-serif" }}>
+    <div style={{ fontFamily: "var(--font-sans-app), sans-serif" }}>
       <title>Таны Бизнест — MANOSH</title>
 
       {/* ── Hero ── */}

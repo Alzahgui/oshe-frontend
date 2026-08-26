@@ -178,7 +178,7 @@ export default function TrainingPage() {
   });
 
   return (
-    <div style={{ fontFamily: "var(--font-plus-jakarta), sans-serif" }}>
+    <div style={{ fontFamily: "var(--font-sans-app), sans-serif" }}>
       <title>Сургалт — MANOSH</title>
 
       {/* ── Hero ── */}

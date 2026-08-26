@@ -33,13 +33,6 @@ export interface User {
   roles: Role[]
 }
 
-/** Raw shape returned by Laravel's GET /api/user */
-export interface LaravelUser {
-  id: number
-  name: string
-  email: string
-}
-
 export interface AuthState {
   user: User | null
   permissions: string[]

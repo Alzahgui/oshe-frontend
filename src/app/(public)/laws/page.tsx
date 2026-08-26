@@ -1,6 +1,7 @@
 "use client";
 
 import { useDeferredValue, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Search, Download, ExternalLink, BookOpen } from "lucide-react";
 import { useLawDocuments } from "@/hooks/useContent";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
@@ -26,6 +27,7 @@ function formatDownloads(count: number): string {
 }
 
 export default function LawsPage() {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState<LawDocumentCategory | undefined>(undefined);
   const [activeLabelIndex, setActiveLabelIndex] = useState(0);
   const [searchValue, setSearchValue] = useState("");
@@ -42,7 +44,7 @@ export default function LawsPage() {
   };
 
   return (
-    <div style={{ fontFamily: "var(--font-plus-jakarta), sans-serif" }}>
+    <div style={{ fontFamily: "var(--font-sans-app), sans-serif" }}>
       <title>Хууль ба Стандарт — MANOSH</title>
 
       {/* ── Hero ── */}
@@ -174,7 +176,8 @@ export default function LawsPage() {
                 return (
                   <div
                     key={law.id}
-                    className="group relative bg-white rounded-2xl p-5 transition-all duration-200 hover:shadow-xl hover:-translate-y-1"
+                    onClick={() => router.push(`/laws/${law.id}`)}
+                    className="group relative bg-white rounded-2xl p-5 transition-all duration-200 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
                     style={{ border: "1px solid rgba(11,22,40,0.07)" }}
                   >
                     {law.isNew && (
@@ -234,7 +237,7 @@ export default function LawsPage() {
                       </div>
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => law.fileUrl && window.open(law.fileUrl, "_blank")}
+                          onClick={(e) => { e.stopPropagation(); if (law.fileUrl) window.open(law.fileUrl, "_blank"); }}
                           disabled={!law.fileUrl}
                           className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold hover:bg-[#e0f7f8] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                           style={{ color: teal }}
@@ -242,9 +245,8 @@ export default function LawsPage() {
                           <Download className="w-3 h-3" /> PDF
                         </button>
                         <button
-                          onClick={() => law.fileUrl && window.open(law.fileUrl, "_blank")}
-                          disabled={!law.fileUrl}
-                          className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold hover:bg-gray-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                          onClick={(e) => { e.stopPropagation(); router.push(`/laws/${law.id}`); }}
+                          className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold hover:bg-gray-50 transition-colors"
                           style={{ color: "#6B7C93" }}
                         >
                           <ExternalLink className="w-3 h-3" /> Харах

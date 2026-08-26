@@ -93,7 +93,7 @@ export default function IncidentAnalysisPage() {
   }
 
   return (
-    <div style={{ fontFamily: 'var(--font-plus-jakarta), sans-serif' }}>
+    <div style={{ fontFamily: 'var(--font-sans-app), sans-serif' }}>
       <title>Аюулт Тохиолдолын Судалгаа — MANOSH</title>
 
       {/* ── Hero ── */}

@@ -2,21 +2,20 @@
 'use client'
 
 import { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { api } from '@/lib/axios'
-import { PermissionGuard } from '@/components/PermissionGuard'
-import { Users, Plus, Search, Shield, MoreHorizontal } from 'lucide-react'
-import type { User } from '@/types/auth'
+import Link from 'next/link'
+import { Users, Pencil, Search, Trash2 } from 'lucide-react'
+import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
+import { RequirePermission } from '@/components/RequirePermission'
+import { useDeleteResource } from '@/hooks/useAdminMutations'
+import { useUsers } from '@/hooks/useAdminData'
 
 const navy = '#0B1628'
 const teal = '#03ADB4'
 const pink = '#FD2EBB'
 
 function UserTable({ search }: { search: string }) {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['users'],
-    queryFn: () => api.get<User[]>('/api/users/').then((r) => r.data),
-  })
+  const { data, isLoading, error } = useUsers()
+  const deleteMutation = useDeleteResource('users', ['users'])
 
   if (isLoading) {
     return (
@@ -133,12 +132,23 @@ function UserTable({ search }: { search: string }) {
                   </span>
                 </td>
                 <td className="px-4 py-3.5">
-                  <button
-                    className="p-1.5 rounded-lg transition-colors hover:bg-gray-100"
-                    style={{ color: '#6B7C93' }}
-                  >
-                    <MoreHorizontal className="w-4 h-4" />
-                  </button>
+                  <div className="flex items-center gap-1 justify-end">
+                    <Link
+                      href={`/users/${user.id}/edit`}
+                      className="p-1.5 rounded-lg transition-colors hover:bg-gray-100"
+                      style={{ color: '#6B7C93' }}
+                    >
+                      <Pencil className="w-4 h-4" />
+                    </Link>
+                    <button
+                      onClick={() => confirm(`Delete user "${user.email}"?`) && deleteMutation.mutate(user.id)}
+                      disabled={deleteMutation.isPending}
+                      className="p-1.5 rounded-lg transition-colors hover:bg-gray-100"
+                      style={{ color: '#ef4444' }}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))
@@ -153,46 +163,15 @@ export default function UsersPage() {
   const [search, setSearch] = useState('')
 
   return (
-    <PermissionGuard
-      role="Admin"
-      fallback={
-        <div className="flex flex-col items-center justify-center py-24">
-          <div
-            className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4"
-            style={{ background: 'rgba(11,22,40,0.06)' }}
-          >
-            <Shield className="w-7 h-7" style={{ color: '#6B7C93' }} />
-          </div>
-          <h2 className="font-bold text-[1.1rem] mb-2" style={{ color: navy }}>
-            Access Restricted
-          </h2>
-          <p className="text-[0.875rem]" style={{ color: '#6B7C93' }}>
-            You need the <strong>Admin</strong> role to view user management.
-          </p>
-        </div>
-      }
-    >
+    <RequirePermission permission="manage-users">
       <div>
-        {/* ── Header ── */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <Users className="w-5 h-5" style={{ color: teal }} />
-              <h1 className="font-extrabold text-[1.5rem]" style={{ color: navy }}>
-                User Management
-              </h1>
-            </div>
-            <p style={{ color: '#6B7C93', fontSize: '0.9rem' }}>
-              Manage accounts, roles, and permissions
-            </p>
-          </div>
-          <button
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm text-white transition-all hover:shadow-lg hover:scale-105"
-            style={{ background: 'linear-gradient(135deg, #03ADB4, #028E95)' }}
-          >
-            <Plus className="w-4 h-4" /> Add User
-          </button>
-        </div>
+        <AdminPageHeader
+          icon={Users}
+          title="User Management"
+          subtitle="Manage accounts, roles, and permissions"
+          newHref="/users/new"
+          newLabel="Add User"
+        />
 
         {/* ── Search ── */}
         <div className="mb-5 relative">
@@ -224,6 +203,6 @@ export default function UsersPage() {
           <UserTable search={search} />
         </div>
       </div>
-    </PermissionGuard>
+    </RequirePermission>
   )
 }

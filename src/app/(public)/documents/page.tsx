@@ -237,7 +237,7 @@ export default function DocumentsPage() {
   const selectedCat = DOC_CATEGORIES.find((c) => c.id === activeCategory) ?? null;
 
   return (
-    <div style={{ fontFamily: "var(--font-plus-jakarta), sans-serif" }}>
+    <div style={{ fontFamily: "var(--font-sans-app), sans-serif" }}>
       <title>Баримт Бичиг — MANOSH</title>
 
       {/* ── Hero ── */}

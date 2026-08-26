@@ -1,8 +1,9 @@
 "use client";
 
-import { useDeferredValue, useState } from "react";
+import { useDeferredValue, useState, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Shield, Globe, Phone, ArrowRight, BookOpen, Bot, Users,
   Download, ExternalLink, TrendingDown, TrendingUp, Clock, MapPin, Monitor,
@@ -32,6 +33,53 @@ function formatMongolianDate(iso: string): string {
   return `${d.getFullYear()} оны ${d.getMonth() + 1}-р сарын ${d.getDate()}`;
 }
 
+function SocialLink({ href, label, children }: { href: string; label: string; children: ReactNode }) {
+  return (
+    <a
+      href={href}
+      aria-label={label}
+      className="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110 hover:bg-white/10"
+      style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)" }}
+    >
+      {children}
+    </a>
+  );
+}
+
+function FacebookGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+      <path d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.79c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.58v1.9h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94Z" />
+    </svg>
+  );
+}
+
+function InstagramGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-4 h-4">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function LinkedinGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+      <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3.2 8.98h3.56V21H3.2V8.98ZM9.2 8.98h3.41v1.64h.05c.48-.9 1.64-1.86 3.38-1.86 3.62 0 4.29 2.38 4.29 5.48V21h-3.56v-5.98c0-1.43-.03-3.26-2-3.26-2 0-2.31 1.56-2.31 3.16V21H9.2V8.98Z" />
+    </svg>
+  );
+}
+
+function XGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+      <path d="M18.9 2.6h3.2l-7 8 8 10.8h-6.3l-4.9-6.4-5.6 6.4H3.1l7.5-8.6L2.9 2.6h6.4l4.4 5.8 5.2-5.8Zm-1.1 17h1.8L7.3 4.4H5.4l12.4 15.2Z" />
+    </svg>
+  );
+}
+
 const LAW_CATEGORIES: { label: string; value?: LawDocumentCategory }[] = [
   { label: "Бүгд" },
   { label: "Үндэсний хууль", value: "national_law" },
@@ -57,16 +105,17 @@ function HeaderNav({ menus }: { menus: NavMenu[] }) {
           >
             <button
               type="button"
-              className="flex items-center gap-1 px-3 py-2 rounded-lg text-[0.82rem] font-semibold transition-colors whitespace-nowrap"
-              style={{
-                color: isOpen ? teal : "#52637A",
-                background: isOpen ? "#f0f9fa" : "transparent",
-              }}
+              className="relative flex items-center gap-1 px-3 py-2 text-[0.85rem] font-semibold transition-colors whitespace-nowrap"
+              style={{ color: isOpen ? teal : navy }}
             >
               <span className={isAi ? "max-w-[180px] truncate" : ""}>{menu.label}</span>
               <ChevronDown
                 className="w-3.5 h-3.5 flex-shrink-0 transition-transform duration-200"
                 style={{ color: isOpen ? teal : "#94A3B8", transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+              />
+              <span
+                className="absolute left-3 right-3 -bottom-px h-[2px] rounded-full transition-opacity duration-200"
+                style={{ background: teal, opacity: isOpen ? 1 : 0 }}
               />
             </button>
 
@@ -117,6 +166,7 @@ function HeaderNav({ menus }: { menus: NavMenu[] }) {
 }
 
 export default function Home() {
+  const router = useRouter();
   const { data: announcements } = useAnnouncements();
   const { data: navMenus } = useNavMenus();
   const { data: heroStatBar } = useHeroStats("stat_bar");
@@ -156,7 +206,7 @@ export default function Home() {
       : null;
 
   return (
-    <div style={{ fontFamily: "var(--font-plus-jakarta), sans-serif", background: "#F8FAFC" }}>
+    <div style={{ fontFamily: "var(--font-sans-app), sans-serif", background: "#F8FAFC" }}>
 
       {/* ── Announcement Bar ── */}
       {announcement && (
@@ -196,14 +246,20 @@ export default function Home() {
             <HeaderNav menus={navMenus ?? []} />
 
             {/* Actions */}
-            <div className="hidden lg:flex items-center gap-2">
-              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[0.78rem] font-medium transition-colors hover:bg-gray-50" style={{ color: "#6B7C93" }}>
-                <Globe className="w-3.5 h-3.5" /> MN / EN
+            <div className="hidden lg:flex items-center gap-5">
+              <button className="flex items-center gap-1.5 text-[0.82rem] font-semibold transition-colors hover:text-[#03ADB4]" style={{ color: "#52637A" }}>
+                <Globe className="w-3.5 h-3.5" /> MN
               </button>
-              <div className="w-px h-5 mx-0.5" style={{ background: "rgba(11,22,40,0.1)" }} />
-              <a href="#contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-[0.82rem] font-bold text-white transition-all hover:opacity-90 hover:shadow-md" style={{ background: "linear-gradient(135deg, #03ADB4, #028E95)" }}>
-                <Phone className="w-3.5 h-3.5" /> Холбоо барих
-              </a>
+              <Link href="/login" className="text-[0.82rem] font-semibold transition-colors hover:text-[#03ADB4]" style={{ color: navy }}>
+                Нэвтрэх
+              </Link>
+              <Link
+                href="/register"
+                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-[0.82rem] font-bold text-white transition-all hover:opacity-90 hover:shadow-md"
+                style={{ background: "linear-gradient(135deg, #03ADB4, #028E95)" }}
+              >
+                Бүртгүүлэх
+              </Link>
             </div>
             <button className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
               <Menu className="w-5 h-5" style={{ color: navy }} />
@@ -389,7 +445,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-5 gap-6">
             {/* Featured */}
             <div className="lg:col-span-3">
-              <a href="#" className="group block h-full">
+              <Link href={`/news/${featuredNews.id}`} className="group block h-full">
                 <div className="h-full rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl" style={{ border: "1px solid rgba(11,22,40,0.08)" }}>
                   <div className="relative overflow-hidden" style={{ height: 260 }}>
                     <Image src={featuredNews.imageUrl} alt={featuredNews.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -418,13 +474,13 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </a>
+              </Link>
             </div>
 
             {/* Side articles */}
             <div className="lg:col-span-2 flex flex-col gap-4">
               {otherNews.map((n) => (
-                <a key={n.id} href="#" className="group block">
+                <Link key={n.id} href={`/news/${n.id}`} className="group block">
                   <div className="flex gap-4 p-4 rounded-2xl transition-all duration-200 hover:shadow-md" style={{ border: "1px solid rgba(11,22,40,0.07)", background: "#fff" }}>
                     <div className="relative flex-shrink-0 w-24 h-20 rounded-xl overflow-hidden">
                       <Image src={n.imageUrl} alt={n.title} fill className="object-cover transition-transform duration-300 group-hover:scale-110" />
@@ -437,7 +493,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                </a>
+                </Link>
               ))}
               <a href="#news" className="flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm transition-all hover:bg-[#03ADB4] hover:text-white hover:shadow-md" style={{ border: `1.5px solid ${teal}`, color: teal }}>
                 Бүх мэдээ &amp; шинэчлэлтүүд <ArrowRight className="w-3.5 h-3.5" />
@@ -500,7 +556,12 @@ export default function Home() {
             {(lawsQuery.data ?? []).map((law) => {
               const Icon = resolveIcon(law.icon);
               return (
-                <div key={law.id} className="group relative bg-white rounded-2xl p-5 transition-all duration-200 hover:shadow-xl hover:-translate-y-1 cursor-pointer" style={{ border: "1px solid rgba(11,22,40,0.07)" }}>
+                <div
+                  key={law.id}
+                  onClick={() => router.push(`/laws/${law.id}`)}
+                  className="group relative bg-white rounded-2xl p-5 transition-all duration-200 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+                  style={{ border: "1px solid rgba(11,22,40,0.07)" }}
+                >
                   {law.isNew && (
                     <div className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full text-xs font-bold text-white" style={{ background: "linear-gradient(135deg,#03ADB4,#FD2EBB)" }}>ШИНЭ</div>
                   )}
@@ -523,7 +584,7 @@ export default function Home() {
                     </div>
                     <div className="flex items-center gap-2">
                       <button
-                        onClick={() => law.fileUrl && window.open(law.fileUrl, "_blank")}
+                        onClick={(e) => { e.stopPropagation(); if (law.fileUrl) window.open(law.fileUrl, "_blank"); }}
                         disabled={!law.fileUrl}
                         className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold hover:bg-[#e0f7f8] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                         style={{ color: teal }}
@@ -531,9 +592,8 @@ export default function Home() {
                         <Download className="w-3 h-3" /> PDF
                       </button>
                       <button
-                        onClick={() => law.fileUrl && window.open(law.fileUrl, "_blank")}
-                        disabled={!law.fileUrl}
-                        className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold hover:bg-gray-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                        onClick={(e) => { e.stopPropagation(); router.push(`/laws/${law.id}`); }}
+                        className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold hover:bg-gray-50 transition-colors"
                         style={{ color: "#6B7C93" }}
                       >
                         <ExternalLink className="w-3 h-3" /> Харах
@@ -710,7 +770,12 @@ export default function Home() {
           ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {(eventsQuery.data ?? []).map((ev) => (
-              <div key={ev.id} className="group relative bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer" style={{ border: "1px solid rgba(11,22,40,0.07)" }}>
+              <div
+                key={ev.id}
+                onClick={() => router.push(`/events/${ev.id}`)}
+                className="group relative bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+                style={{ border: "1px solid rgba(11,22,40,0.07)" }}
+              >
                 {ev.imageUrl ? (
                   <div className="relative overflow-hidden" style={{ height: 140 }}>
                     <Image src={ev.imageUrl} alt={ev.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -955,6 +1020,21 @@ export default function Home() {
                 </ul>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Social & language */}
+        <div className="px-4 py-6" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2.5">
+              <SocialLink href="#" label="Facebook"><FacebookGlyph /></SocialLink>
+              <SocialLink href="#" label="Instagram"><InstagramGlyph /></SocialLink>
+              <SocialLink href="#" label="LinkedIn"><LinkedinGlyph /></SocialLink>
+              <SocialLink href="#" label="X (Twitter)"><XGlyph /></SocialLink>
+            </div>
+            <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.78rem] font-semibold transition-colors hover:bg-white/10" style={{ color: "rgba(255,255,255,0.6)", border: "1px solid rgba(255,255,255,0.12)" }}>
+              <Globe className="w-3.5 h-3.5" /> MN / EN
+            </button>
           </div>
         </div>
 

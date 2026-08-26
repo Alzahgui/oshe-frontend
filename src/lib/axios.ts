@@ -16,7 +16,9 @@ export function ensureCsrfCookie() {
   return api.get('/sanctum/csrf-cookie')
 }
 
-// ─── Response interceptor — session expired → clear local state, redirect ────
+// ─── Response interceptor — session expired → clear local state ─────────────
+
+const PROTECTED_PREFIXES = ['/dashboard', '/portal']
 
 api.interceptors.response.use(
   (response) => response,
@@ -31,7 +33,13 @@ api.interceptors.response.use(
     const { useAuthStore } = await import('@/store/authStore')
     useAuthStore.getState().clearSession()
 
-    if (typeof window !== 'undefined' && window.location.pathname !== '/login') {
+    // Only force a redirect when the user was on a protected page — a 401 on a
+    // public page (e.g. the initial auth check) just means "not logged in".
+    const isProtected =
+      typeof window !== 'undefined' &&
+      PROTECTED_PREFIXES.some((p) => window.location.pathname.startsWith(p))
+
+    if (isProtected && window.location.pathname !== '/login') {
       window.location.href = '/login'
     }
     return Promise.reject(error)

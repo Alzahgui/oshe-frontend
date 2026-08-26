@@ -408,7 +408,7 @@ export default function ParticipationPage() {
       : PROGRAMS.filter((p) => p.status === activeFilter)
 
   return (
-    <div style={{ fontFamily: 'var(--font-plus-jakarta), sans-serif' }}>
+    <div style={{ fontFamily: 'var(--font-sans-app), sans-serif' }}>
       <title>Миний Оролцоо — MANOSH</title>
 
       {/* ── Hero ── */}

@@ -3,21 +3,20 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { api, ensureCsrfCookie } from '@/lib/axios'
-import type { AuthState, LaravelUser, User } from '@/types/auth'
+import type { AuthState, MenuItem, User } from '@/types/auth'
 
 const AUTH_COOKIE_MAX_AGE = 60 * 60 * 2 // matches Laravel's default 120-minute session lifetime
 
-function normalizeUser(raw: LaravelUser): User {
-  const [first_name, ...rest] = raw.name.trim().split(/\s+/)
-  return {
-    id: raw.id,
-    email: raw.email,
-    first_name: first_name ?? raw.name,
-    last_name: rest.join(' '),
-    is_active: true,
-    is_superuser: false,
-    roles: [],
-  }
+function fetchMe() {
+  return api.get<{ data: User }>('/api/user').then((r) => r.data.data)
+}
+
+function fetchMenu() {
+  return api.get<{ data: MenuItem[] }>('/api/menus').then((r) => r.data.data)
+}
+
+function permissionsOf(user: User): string[] {
+  return user.roles.flatMap((role) => role.permissions.map((p) => p.codename))
 }
 
 function setAuthenticatedCookie() {
@@ -42,12 +41,12 @@ export const useAuthStore = create<AuthState>()(
         await ensureCsrfCookie()
         await api.post('/api/login', { email, password })
 
-        const { data } = await api.get<LaravelUser>('/api/user')
+        const [user, menu] = await Promise.all([fetchMe(), fetchMenu()])
 
         set({
-          user: normalizeUser(data),
-          permissions: [],
-          menu: [],
+          user,
+          permissions: permissionsOf(user),
+          menu,
           isAuthenticated: true,
         })
         setAuthenticatedCookie()
@@ -71,11 +70,11 @@ export const useAuthStore = create<AuthState>()(
 
       initialize: async () => {
         try {
-          const { data } = await api.get<LaravelUser>('/api/user')
+          const [user, menu] = await Promise.all([fetchMe(), fetchMenu()])
           set({
-            user: normalizeUser(data),
-            permissions: [],
-            menu: [],
+            user,
+            permissions: permissionsOf(user),
+            menu,
             isAuthenticated: true,
           })
           setAuthenticatedCookie()

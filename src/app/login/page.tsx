@@ -16,7 +16,7 @@ export default function LoginPage() {
   return (
     <div
       className="min-h-screen flex"
-      style={{ fontFamily: 'var(--font-plus-jakarta), sans-serif' }}
+      style={{ fontFamily: 'var(--font-sans-app), sans-serif' }}
     >
       {/* ── Left panel – branding ── */}
       <div
