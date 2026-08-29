@@ -216,7 +216,7 @@ export default function LoginPage() {
               Тавтай морилно уу
             </h2>
             <p className="text-[0.9rem]" style={{ color: '#6B7C93' }}>
-              MANOSH гишүүний порталд нэвтрэх
+              Нэвтрэх
             </p>
           </div>
 
