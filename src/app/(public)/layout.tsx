@@ -51,7 +51,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
                 </li>
                 <li className="flex items-center gap-3 text-[0.85rem]" style={{ color: "rgba(255,255,255,0.55)" }}>
                   <Globe className="w-4 h-4 flex-shrink-0" style={{ color: teal }} />
-                  info@manosh.mn
+                  info@yosh.mn
                 </li>
                 <li className="text-[0.82rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.4)" }}>
                   Чингисийн өргөн чөлөө 15, Чингэлтэй дүүрэг,<br />

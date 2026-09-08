@@ -39,7 +39,7 @@ export default function PublicHeader() {
                 className="font-extrabold text-[1.05rem] tracking-tight block leading-tight"
                 style={{ color: navy }}
               >
-                MANOSH
+                YOSH
               </span>
               <span
                 className="text-[0.52rem] font-semibold tracking-wider block leading-tight uppercase"

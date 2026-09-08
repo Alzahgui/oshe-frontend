@@ -111,7 +111,7 @@ export default function PortalHomePage() {
             Сайн байна уу, {user.first_name}!
           </h1>
           <p className="text-sm mt-1" style={{ color: 'rgba(255,255,255,0.6)' }}>
-            MANOSH гишүүний порталд тавтай морилно уу
+            YOSH гишүүний порталд тавтай морилно уу
           </p>
           <div className="mt-3">
             <StatusBadge status="active" label="Байгууллагын гишүүн" />

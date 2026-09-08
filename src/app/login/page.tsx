@@ -195,7 +195,7 @@ export default function LoginPage() {
           />
           <div>
             <div className="font-extrabold text-[1.1rem] leading-tight" style={{ color: navy }}>
-              MANOSH
+              YOSH
             </div>
             <div
               className="text-[0.6rem] font-medium tracking-wider"

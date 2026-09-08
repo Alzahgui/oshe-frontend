@@ -10,7 +10,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "MANOSH - Mongolia Occupational Safety & Health Association",
+  title: "YOSH - Mongolia Occupational Safety & Health Association",
   description: "Mongolia's national authority for occupational safety and health, featuring ISO 45001 standards, expert training, and AI-powered safety guidance.",
   icons: {
     icon: "/logo.jpg",
