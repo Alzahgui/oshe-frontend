@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import {
   Shield, Globe, Phone, ArrowRight, BookOpen, Bot, Users,
   Download, ExternalLink, TrendingDown, TrendingUp, Clock, MapPin, Monitor,
-  Star, Sparkles, Search, Calendar, Send, Menu, Play, ChevronRight, ChevronDown,
+  Star, Sparkles, Search, Calendar, Send, Menu, Play, ChevronRight, ChevronDown, Mail,
 } from "lucide-react";
 import {
   useAiFeatures, useAnnouncements, useEvents, useFooterLinkGroups,
@@ -1007,7 +1007,7 @@ export default function Home() {
               <div className="space-y-3 mb-5">
                 <div className="flex items-start gap-3"><MapPin className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" style={{ color: "rgba(255,255,255,0.35)" }} /><span className="text-[0.8rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{settings?.contact_address ?? "Чингисийн өргөн чөлөө 15, Чингэлтэй дүүрэг, Улаанбаатар 15160, Монгол улс"}</span></div>
                 <div className="flex items-center gap-3"><Phone className="w-3.5 h-3.5 flex-shrink-0" style={{ color: "rgba(255,255,255,0.35)" }} /><span className="text-[0.8rem]" style={{ color: "rgba(255,255,255,0.5)" }}>{settings?.contact_phone ?? "+976 11-329-000"}</span></div>
-                <div className="flex items-center gap-3"><Globe className="w-3.5 h-3.5 flex-shrink-0" style={{ color: "rgba(255,255,255,0.35)" }} /><span className="text-[0.8rem]" style={{ color: "rgba(255,255,255,0.5)" }}>{settings?.contact_email ?? "info@YOSH.mn"}</span></div>
+                <div className="flex items-center gap-3"><Mail className="w-3.5 h-3.5 flex-shrink-0" style={{ color: "rgba(255,255,255,0.35)" }} /><span className="text-[0.8rem]" style={{ color: "rgba(255,255,255,0.5)" }}>{settings?.contact_email ?? "info@YOSH.mn"}</span></div>
               </div>
             </div>
 
