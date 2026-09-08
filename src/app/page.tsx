@@ -38,6 +38,8 @@ function SocialLink({ href, label, children }: { href: string; label: string; ch
     <a
       href={href}
       aria-label={label}
+      target="_blank"
+      rel="noopener noreferrer"
       className="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110 hover:bg-white/10"
       style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)" }}
     >
@@ -1027,10 +1029,8 @@ export default function Home() {
         <div className="px-4 py-6" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2.5">
-              <SocialLink href="#" label="Facebook"><FacebookGlyph /></SocialLink>
-              <SocialLink href="#" label="Instagram"><InstagramGlyph /></SocialLink>
-              <SocialLink href="#" label="LinkedIn"><LinkedinGlyph /></SocialLink>
-              <SocialLink href="#" label="X (Twitter)"><XGlyph /></SocialLink>
+              <SocialLink href="https://www.facebook.com/profile.php?id=61583818508412&sk=directory_contact_info" label="Facebook"><FacebookGlyph /></SocialLink>
+              <SocialLink href="https://www.instagram.com/y0sh.mn/?fbclid=IwY2xjawUM77twZG9mBWV4dG4DYWVtAjEwAGJyaWQRMXY4RER2SmZ1UGp4QlJGUG1zcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeE_A6I95fNQgLbZLIy6zP3XXGTRkPMl8usWNidGeZwT87PDKjoY0fHTW7hFg_aem_78WSilbk5P_aXwNrA6miFA" label="Instagram"><InstagramGlyph /></SocialLink>
             </div>
             <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.78rem] font-semibold transition-colors hover:bg-white/10" style={{ color: "rgba(255,255,255,0.6)", border: "1px solid rgba(255,255,255,0.12)" }}>
               <Globe className="w-3.5 h-3.5" /> MN / EN
@@ -1043,7 +1043,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-[0.78rem]" style={{ color: "rgba(255,255,255,0.3)" }}>{settings?.footer_copyright ?? "© 2024 YOSH — Монголын Үндэсний Хөдөлмөрийн Аюулгүй Байдал, Эрүүл Ахуйн Холбоо. Бүх эрх хуулиар хамгаалагдсан."}</p>
             <div className="flex items-center gap-2 flex-wrap">
-              {(settings?.footer_badges ?? "ISO 45001:2018,ILO түнш,НБУ-ын ТХЗ-тай нийцсэн,KOSHA баталгаажсан").split(",").map((badge) => (
+              {(settings?.footer_badges ?? "").split(",").map((badge) => (
                 <span key={badge} className="px-2.5 py-1 rounded-md text-[0.68rem] font-semibold" style={{ background: "rgba(3,173,180,0.12)", color: "rgba(3,173,180,0.8)", border: "1px solid rgba(3,173,180,0.2)" }}>{badge}</span>
               ))}
             </div>
