@@ -66,22 +66,6 @@ function InstagramGlyph() {
   );
 }
 
-function LinkedinGlyph() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-      <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3.2 8.98h3.56V21H3.2V8.98ZM9.2 8.98h3.41v1.64h.05c.48-.9 1.64-1.86 3.38-1.86 3.62 0 4.29 2.38 4.29 5.48V21h-3.56v-5.98c0-1.43-.03-3.26-2-3.26-2 0-2.31 1.56-2.31 3.16V21H9.2V8.98Z" />
-    </svg>
-  );
-}
-
-function XGlyph() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-      <path d="M18.9 2.6h3.2l-7 8 8 10.8h-6.3l-4.9-6.4-5.6 6.4H3.1l7.5-8.6L2.9 2.6h6.4l4.4 5.8 5.2-5.8Zm-1.1 17h1.8L7.3 4.4H5.4l12.4 15.2Z" />
-    </svg>
-  );
-}
-
 const LAW_CATEGORIES: { label: string; value?: LawDocumentCategory }[] = [
   { label: "Бүгд" },
   { label: "Үндэсний хууль", value: "national_law" },
