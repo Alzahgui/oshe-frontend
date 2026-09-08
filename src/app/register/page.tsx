@@ -174,7 +174,7 @@ export default function RegisterPage() {
               className="w-10 h-10 rounded-xl object-cover shadow-md flex-shrink-0"
             />
             <div>
-              <div className="font-extrabold text-[1.1rem] leading-tight text-white">MANOSH</div>
+              <div className="font-extrabold text-[1.1rem] leading-tight text-white">YOSH</div>
               <div className="text-[0.6rem] font-medium tracking-wider" style={{ color: 'rgba(255,255,255,0.45)' }}>
                 МОНГОЛЫН ХАБЭА-ИЙН ХОЛБОО
               </div>
@@ -209,7 +209,7 @@ export default function RegisterPage() {
               </span>
             </h1>
             <p className="leading-relaxed max-w-md" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem' }}>
-              MANOSH гишүүнчлэлд нэгдэж ХАБЭА-ын дэлхийн шилдэг туршлагаас суралцаж, байгууллагынхаа аюулгүй орчныг бүтээ.
+              YOSH гишүүнчлэлд нэгдэж ХАБЭА-ын дэлхийн шилдэг туршлагаас суралцаж, байгууллагынхаа аюулгүй орчныг бүтээ.
             </p>
 
             {/* Stats */}
@@ -272,7 +272,7 @@ export default function RegisterPage() {
             className="w-10 h-10 rounded-xl object-cover flex-shrink-0"
           />
           <div>
-            <div className="font-extrabold text-[1.1rem] leading-tight" style={{ color: navy }}>MANOSH</div>
+            <div className="font-extrabold text-[1.1rem] leading-tight" style={{ color: navy }}>YOSH</div>
             <div className="text-[0.6rem] font-medium tracking-wider" style={{ color: '#6B7C93' }}>
               МОНГОЛЫН ХАБЭА-ИЙН ХОЛБОО
             </div>
@@ -285,7 +285,7 @@ export default function RegisterPage() {
               Гишүүн болох
             </h2>
             <p className="text-[0.9rem]" style={{ color: '#6B7C93' }}>
-              MANOSH гишүүний порталд бүртгүүлэх
+              YOSH гишүүний порталд бүртгүүлэх
             </p>
           </div>
 

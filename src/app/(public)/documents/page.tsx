@@ -238,7 +238,7 @@ export default function DocumentsPage() {
 
   return (
     <div style={{ fontFamily: "var(--font-sans-app), sans-serif" }}>
-      <title>Баримт Бичиг — MANOSH</title>
+      <title>Баримт Бичиг — YOSH</title>
 
       {/* ── Hero ── */}
       <section

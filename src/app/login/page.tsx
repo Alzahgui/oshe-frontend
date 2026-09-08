@@ -51,7 +51,7 @@ export default function LoginPage() {
               className="w-10 h-10 rounded-xl object-cover shadow-md flex-shrink-0"
             />
             <div>
-              <div className="font-extrabold text-[1.1rem] leading-tight text-white">MANOSH</div>
+              <div className="font-extrabold text-[1.1rem] leading-tight text-white">YOSH</div>
               <div
                 className="text-[0.6rem] font-medium tracking-wider"
                 style={{ color: 'rgba(255,255,255,0.45)' }}

@@ -409,7 +409,7 @@ export default function ParticipationPage() {
 
   return (
     <div style={{ fontFamily: 'var(--font-sans-app), sans-serif' }}>
-      <title>Миний Оролцоо — MANOSH</title>
+      <title>Миний Оролцоо — YOSH</title>
 
       {/* ── Hero ── */}
       <section className="relative overflow-hidden py-20 lg:py-24" style={{ background: navy }}>

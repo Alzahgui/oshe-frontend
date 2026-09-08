@@ -152,7 +152,7 @@ export function Sidebar() {
           <Shield className="w-5 h-5 text-white" />
         </div>
         <div>
-          <div className="font-extrabold text-white text-[0.95rem] leading-tight">MANOSH</div>
+          <div className="font-extrabold text-white text-[0.95rem] leading-tight">YOSH</div>
           <div
             className="text-[0.58rem] font-medium tracking-wider uppercase"
             style={{ color: 'rgba(255,255,255,0.4)' }}

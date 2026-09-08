@@ -45,7 +45,7 @@ export default function LawsPage() {
 
   return (
     <div style={{ fontFamily: "var(--font-sans-app), sans-serif" }}>
-      <title>Хууль ба Стандарт — MANOSH</title>
+      <title>Хууль ба Стандарт — YOSH</title>
 
       {/* ── Hero ── */}
       <section

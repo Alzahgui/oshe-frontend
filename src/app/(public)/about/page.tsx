@@ -17,7 +17,7 @@ const STATS = [
 export default function AboutPage() {
   return (
     <div style={{ fontFamily: "var(--font-sans-app), sans-serif" }}>
-      <title>БИД ҮҮ? — MANOSH</title>
+      <title>БИД ҮҮ? — YOSH</title>
 
       {/* ── Hero ── */}
       <section
@@ -204,7 +204,7 @@ export default function AboutPage() {
                 МАНАЙ БАГ
               </h3>
               <p className="text-[0.88rem] leading-relaxed mb-4" style={{ color: "#6B7C93" }}>
-                MANOSH-ийн удирдах зөвлөл нь хөдөлмөрийн аюулгүй байдал, эрүүл ахуйн
+                YOSH-ийн удирдах зөвлөл нь хөдөлмөрийн аюулгүй байдал, эрүүл ахуйн
                 чиглэлд олон жилийн туршлагатай мэргэжилтнүүдээс бүрддэг.
               </p>
               <ul className="space-y-2">

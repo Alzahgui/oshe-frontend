@@ -26,7 +26,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
                   <Shield className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <div className="font-extrabold text-white text-[1.05rem] leading-tight">MANOSH</div>
+                  <div className="font-extrabold text-white text-[1.05rem] leading-tight">YOSH</div>
                   <div
                     className="text-[0.58rem] font-medium tracking-wider uppercase"
                     style={{ color: "rgba(255,255,255,0.4)" }}
@@ -91,7 +91,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         <div className="px-4 py-5" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-[0.78rem]" style={{ color: "rgba(255,255,255,0.3)" }}>
-              © 2024 MANOSH — Монголын Үндэсний Хөдөлмөрийн Аюулгүй Байдал, Эрүүл Ахуйн Холбоо. Бүх эрх хуулиар хамгаалагдсан.
+              © 2024 YOSH — Монголын Үндэсний Хөдөлмөрийн Аюулгүй Байдал, Эрүүл Ахуйн Холбоо. Бүх эрх хуулиар хамгаалагдсан.
             </p>
             <div className="flex items-center gap-2 flex-wrap">
               {["ISO 45001:2018", "ILO түнш", "НБУ-ын ТХЗ-тай нийцсэн"].map((badge) => (

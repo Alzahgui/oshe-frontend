@@ -57,7 +57,7 @@ const SERVICES = [
     iconBg: "rgba(16,185,129,0.1)",
     border: "rgba(16,185,129,0.2)",
     title: "Миний оролцоо",
-    description: "MANOSH-ийн арга хэмжээ, сургалт, хурал зөвлөлгөөнд оролцсон түүхээ харах, сертификатаа авах.",
+    description: "YOSH-ийн арга хэмжээ, сургалт, хурал зөвлөлгөөнд оролцсон түүхээ харах, сертификатаа авах.",
     linkText: "Оролцоо харах",
     href: "/business/participation",
   },
@@ -67,7 +67,7 @@ const SERVICES = [
     iconBg: "rgba(253,46,187,0.1)",
     border: "rgba(253,46,187,0.2)",
     title: "Гишүүнчлэл",
-    description: "MANOSH-ийн гишүүн болж, онцгой эрх, хөнгөлөлт болон нэмэлт үйлчилгээнүүдэд хандах боломжтой болно уу.",
+    description: "YOSH-ийн гишүүн болж, онцгой эрх, хөнгөлөлт болон нэмэлт үйлчилгээнүүдэд хандах боломжтой болно уу.",
     linkText: "Бүртгүүлэх",
     href: "/register",
   },
@@ -76,7 +76,7 @@ const SERVICES = [
 export default function BusinessPage() {
   return (
     <div style={{ fontFamily: "var(--font-sans-app), sans-serif" }}>
-      <title>Таны Бизнест — MANOSH</title>
+      <title>Таны Бизнест — YOSH</title>
 
       {/* ── Hero ── */}
       <section
@@ -204,7 +204,7 @@ export default function BusinessPage() {
               </h2>
               <p className="mb-6 text-[0.95rem]" style={{ color: "rgba(255,255,255,0.6)" }}>
                 QPay болон SocialPay-р шимтгэлгүйгээр гишүүнчлэлийн төлбөрөө хийж,
-                MANOSH-ийн бүх үйлчилгээнд хандах эрхтэй болно уу.
+                YOSH-ийн бүх үйлчилгээнд хандах эрхтэй болно уу.
               </p>
 
               {/* Payment badges */}
@@ -270,12 +270,12 @@ export default function BusinessPage() {
               +976 11-329-000
             </a>
             <a
-              href="mailto:info@manosh.mn"
+              href="mailto:info@YOSH.mn"
               className="flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-white font-semibold text-[0.9rem] transition-all hover:shadow-md"
               style={{ border: "1.5px solid rgba(11,22,40,0.1)", color: navy }}
             >
               <Globe className="w-5 h-5" style={{ color: teal }} />
-              info@manosh.mn
+              info@YOSH.mn
             </a>
           </div>
         </div>

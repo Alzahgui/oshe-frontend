@@ -23,7 +23,7 @@ export default function NewsDetailPage() {
 
   return (
     <div style={{ fontFamily: "var(--font-sans-app), sans-serif", background: "#F8FAFC" }}>
-      {article && <title>{`${article.title} — MANOSH`}</title>}
+      {article && <title>{`${article.title} — YOSH`}</title>}
 
       <section className="py-10 lg:py-14">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

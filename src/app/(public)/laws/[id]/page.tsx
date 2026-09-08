@@ -23,7 +23,7 @@ export default function LawDocumentDetailPage() {
 
   return (
     <div style={{ fontFamily: "var(--font-sans-app), sans-serif", background: "#F8FAFC" }}>
-      {law && <title>{`${law.title} — MANOSH`}</title>}
+      {law && <title>{`${law.title} — YOSH`}</title>}
 
       <section className="py-10 lg:py-14">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -200,7 +200,7 @@ function NotificationsTab() {
   const items = [
     { key: 'incidents' as const, label: 'Incident Alerts', desc: 'New workplace incidents reported in your region' },
     { key: 'compliance' as const, label: 'Compliance Reminders', desc: 'Upcoming audit deadlines and certification renewals' },
-    { key: 'news' as const, label: 'MANOSH Newsletter', desc: 'Monthly digest of news, events, and regulation changes' },
+    { key: 'news' as const, label: 'YOSH Newsletter', desc: 'Monthly digest of news, events, and regulation changes' },
     { key: 'training' as const, label: 'Training Updates', desc: 'New courses and certification programs available' },
   ]
 

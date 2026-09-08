@@ -51,7 +51,7 @@ const PLACEHOLDER_EVENTS: Event[] = [
     startDate: "2026-09-22",
     endDate: null,
     timeRange: "09:00 – 13:00",
-    location: "MANOSH сургалтын төв, УБ",
+    location: "YOSH сургалтын төв, УБ",
     isOnline: false,
     seatsInfo: "20 суудал үлдсэн",
     price: "75,000 ₮",
@@ -179,7 +179,7 @@ export default function TrainingPage() {
 
   return (
     <div style={{ fontFamily: "var(--font-sans-app), sans-serif" }}>
-      <title>Сургалт — MANOSH</title>
+      <title>Сургалт — YOSH</title>
 
       {/* ── Hero ── */}
       <section

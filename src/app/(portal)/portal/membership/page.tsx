@@ -120,7 +120,7 @@ export default function MembershipPage() {
               </div>
               <h2 className="font-extrabold text-white text-xl">Байгууллагын гишүүн</h2>
               <p className="mt-1 text-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>
-                MANOSH гишүүнчлэл
+                YOSH гишүүнчлэл
               </p>
             </div>
 

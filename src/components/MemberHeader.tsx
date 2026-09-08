@@ -62,7 +62,7 @@ export default function MemberHeader() {
           </div>
           <div>
             <div className="font-extrabold text-[0.95rem] leading-tight" style={{ color: navy }}>
-              MANOSH
+              YOSH
             </div>
             <div className="text-[0.55rem] font-semibold tracking-wider" style={{ color: teal }}>
               ГИШҮҮНИЙ ПОРТАЛ

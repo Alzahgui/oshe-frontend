@@ -94,7 +94,7 @@ export default function IncidentAnalysisPage() {
 
   return (
     <div style={{ fontFamily: 'var(--font-sans-app), sans-serif' }}>
-      <title>Аюулт Тохиолдолын Судалгаа — MANOSH</title>
+      <title>Аюулт Тохиолдолын Судалгаа — YOSH</title>
 
       {/* ── Hero ── */}
       <section className="relative overflow-hidden py-20 lg:py-24" style={{ background: navy }}>
@@ -364,7 +364,7 @@ export default function IncidentAnalysisPage() {
                     <div className="text-[0.7rem] font-medium" style={{ color: 'rgba(255,255,255,0.4)' }}>
                       И-мэйл
                     </div>
-                    <div className="text-white font-bold text-[0.88rem]">safety@manosh.mn</div>
+                    <div className="text-white font-bold text-[0.88rem]">safety@YOSH.mn</div>
                   </div>
                 </div>
               </div>

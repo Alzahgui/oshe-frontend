@@ -428,7 +428,7 @@ export default function Home() {
                 <span className="w-1.5 h-1.5 rounded-full" style={{ background: teal }} />
                 <span className="text-[0.75rem] font-bold tracking-wider" style={{ color: teal }}>МЭДЭЭ БА ШИНЭЧЛЭЛТҮҮД</span>
               </div>
-              <h2 className="font-extrabold leading-tight" style={{ color: navy, fontSize: "clamp(1.75rem,3vw,2.25rem)" }}>MANOSH-н хамгийн сүүлийн үеийн мэдээ</h2>
+              <h2 className="font-extrabold leading-tight" style={{ color: navy, fontSize: "clamp(1.75rem,3vw,2.25rem)" }}>YOSH-н хамгийн сүүлийн үеийн мэдээ</h2>
             </div>
             <a href="#news" className="hidden sm:flex items-center gap-2 text-sm font-semibold hover:text-[#028e95] transition-colors" style={{ color: teal }}>
               Бүх мэдээг харах <ArrowRight className="w-4 h-4" />
@@ -840,7 +840,7 @@ export default function Home() {
                 </span>
               </h2>
               <p className="mb-8 leading-relaxed text-[0.95rem]" style={{ color: "#6B7C93" }}>
-                Манай хиймэл оюун ухааны туслах нь Монгол улсын хөдөлмөрийн аюулгүй байдлын хууль, олон улсын стандарт, MANOSH-ийн удирдамж дээр сургагдсан — ажлын байрны аюулгүй байдлын асуултад шуурхай, найдвартай хариулт өгнө.
+                Манай хиймэл оюун ухааны туслах нь Монгол улсын хөдөлмөрийн аюулгүй байдлын хууль, олон улсын стандарт, YOSH-ийн удирдамж дээр сургагдсан — ажлын байрны аюулгүй байдлын асуултад шуурхай, найдвартай хариулт өгнө.
               </p>
               <div className="grid sm:grid-cols-2 gap-4 mb-8">
                 {(aiFeatures ?? []).map((f) => {
@@ -868,7 +868,7 @@ export default function Home() {
                     <Shield className="w-4.5 h-4.5 text-white" />
                   </div>
                   <div>
-                    <div className="text-white font-bold text-[0.9rem]">MANOSH Аюулгүй байдлын AI</div>
+                    <div className="text-white font-bold text-[0.9rem]">YOSH Аюулгүй байдлын AI</div>
                     <div className="flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
                       <span className="text-[0.72rem]" style={{ color: "rgba(255,255,255,0.5)" }}>Онлайн · 340+ ХАБЭА стандартаар сургагдсан</span>
@@ -979,9 +979,9 @@ export default function Home() {
         <div className="py-12 text-center px-4" style={{ background: "linear-gradient(135deg,rgba(3,173,180,0.15) 0%,rgba(253,46,187,0.1) 100%)", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           <div className="max-w-2xl mx-auto">
             <h2 className="font-extrabold text-white mb-3 leading-tight" style={{ fontSize: "clamp(1.5rem,3vw,2rem)" }}>{settings?.cta_title ?? "Илүү аюулгүй ажлын байр бий болгох бэлэн үү?"}</h2>
-            <p className="mb-6 text-[0.95rem]" style={{ color: "rgba(255,255,255,0.55)" }}>{settings?.cta_description ?? "MANOSH-ийн гишүүнчлэл, сургалт, хиймэл оюун ухаанд суурилсан аюулгүй байдлын удирдамжаар ашиглаж буй 2,847 монгол байгууллагад нэгдээрэй."}</p>
+            <p className="mb-6 text-[0.95rem]" style={{ color: "rgba(255,255,255,0.55)" }}>{settings?.cta_description ?? "YOSH-ийн гишүүнчлэл, сургалт, хиймэл оюун ухаанд суурилсан аюулгүй байдлын удирдамжаар ашиглаж буй 2,847 монгол байгууллагад нэгдээрэй."}</p>
             <div className="flex flex-wrap justify-center gap-3">
-              <a href="#membership" className="px-6 py-3 rounded-xl font-bold text-white hover:shadow-xl hover:scale-105 transition-all" style={{ background: "linear-gradient(135deg,#03ADB4,#028E95)", boxShadow: "0 8px 25px rgba(3,173,180,0.4)" }}>MANOSH-д нэгдэх</a>
+              <a href="#membership" className="px-6 py-3 rounded-xl font-bold text-white hover:shadow-xl hover:scale-105 transition-all" style={{ background: "linear-gradient(135deg,#03ADB4,#028E95)", boxShadow: "0 8px 25px rgba(3,173,180,0.4)" }}>YOSH-д нэгдэх</a>
               <a href="#ai" className="px-6 py-3 rounded-xl font-bold text-white hover:scale-105 transition-all" style={{ border: "1.5px solid rgba(255,255,255,0.2)" }}>AI туслах үнэгүй турших</a>
             </div>
           </div>
@@ -1005,7 +1005,7 @@ export default function Home() {
               <div className="space-y-3 mb-5">
                 <div className="flex items-start gap-3"><MapPin className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" style={{ color: "rgba(255,255,255,0.35)" }} /><span className="text-[0.8rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{settings?.contact_address ?? "Чингисийн өргөн чөлөө 15, Чингэлтэй дүүрэг, Улаанбаатар 15160, Монгол улс"}</span></div>
                 <div className="flex items-center gap-3"><Phone className="w-3.5 h-3.5 flex-shrink-0" style={{ color: "rgba(255,255,255,0.35)" }} /><span className="text-[0.8rem]" style={{ color: "rgba(255,255,255,0.5)" }}>{settings?.contact_phone ?? "+976 11-329-000"}</span></div>
-                <div className="flex items-center gap-3"><Globe className="w-3.5 h-3.5 flex-shrink-0" style={{ color: "rgba(255,255,255,0.35)" }} /><span className="text-[0.8rem]" style={{ color: "rgba(255,255,255,0.5)" }}>{settings?.contact_email ?? "info@manosh.mn"}</span></div>
+                <div className="flex items-center gap-3"><Globe className="w-3.5 h-3.5 flex-shrink-0" style={{ color: "rgba(255,255,255,0.35)" }} /><span className="text-[0.8rem]" style={{ color: "rgba(255,255,255,0.5)" }}>{settings?.contact_email ?? "info@YOSH.mn"}</span></div>
               </div>
             </div>
 
@@ -1041,7 +1041,7 @@ export default function Home() {
         {/* Bottom bar */}
         <div className="px-4 py-5" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-[0.78rem]" style={{ color: "rgba(255,255,255,0.3)" }}>{settings?.footer_copyright ?? "© 2024 MANOSH — Монголын Үндэсний Хөдөлмөрийн Аюулгүй Байдал, Эрүүл Ахуйн Холбоо. Бүх эрх хуулиар хамгаалагдсан."}</p>
+            <p className="text-[0.78rem]" style={{ color: "rgba(255,255,255,0.3)" }}>{settings?.footer_copyright ?? "© 2024 YOSH — Монголын Үндэсний Хөдөлмөрийн Аюулгүй Байдал, Эрүүл Ахуйн Холбоо. Бүх эрх хуулиар хамгаалагдсан."}</p>
             <div className="flex items-center gap-2 flex-wrap">
               {(settings?.footer_badges ?? "ISO 45001:2018,ILO түнш,НБУ-ын ТХЗ-тай нийцсэн,KOSHA баталгаажсан").split(",").map((badge) => (
                 <span key={badge} className="px-2.5 py-1 rounded-md text-[0.68rem] font-semibold" style={{ background: "rgba(3,173,180,0.12)", color: "rgba(3,173,180,0.8)", border: "1px solid rgba(3,173,180,0.2)" }}>{badge}</span>
