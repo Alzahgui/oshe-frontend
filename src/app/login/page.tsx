@@ -240,23 +240,6 @@ export default function LoginPage() {
               Гишүүнчлэлд хамрагдах <ChevronRight className="w-3 h-3 inline-block -mt-0.5" />
             </a>
           </p>
-
-          {/* Footer note */}
-          <div className="mt-10 pt-6" style={{ borderTop: '1px solid rgba(11,22,40,0.07)' }}>
-            <p
-              className="text-center text-[0.72rem] leading-relaxed"
-              style={{ color: '#6B7C93' }}
-            >
-              ISO 45001 стандартын дагуу хамгаалагдсан.
-              <br />
-              Тусламж хэрэгтэй юу?{' '}
-              <a href="#" className="font-semibold hover:underline" style={{ color: teal }}>
-                Дэмжлэгтэй холбогдох
-              </a>{' '}
-              эсвэл залгах{' '}
-              <span style={{ color: navy, fontWeight: 600 }}>+976 11-329-000</span>
-            </p>
-          </div>
         </div>
       </div>
     </div>
