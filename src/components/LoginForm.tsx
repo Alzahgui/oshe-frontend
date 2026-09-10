@@ -53,7 +53,7 @@ export function LoginForm() {
       {/* Email */}
       <div>
         <label className="block text-[0.82rem] font-semibold mb-1.5" style={{ color: navy }}>
-          Email address
+          Имэйл хаяг
         </label>
         <div className="relative">
           <Mail
@@ -89,10 +89,10 @@ export function LoginForm() {
       <div>
         <div className="flex items-center justify-between mb-1.5">
           <label className="text-[0.82rem] font-semibold" style={{ color: navy }}>
-            Password
+            Нууц үг
           </label>
           <a href="#" className="text-[0.78rem] font-semibold hover:underline" style={{ color: teal }}>
-            Forgot password?
+            Нууц үг ээ мартсан уу?
           </a>
         </div>
         <div className="relative">
@@ -167,7 +167,7 @@ export function LoginForm() {
           </svg>
         ) : (
           <>
-            Sign in to Member Portal <ArrowRight className="w-4 h-4" />
+            Нэвтрэх <ArrowRight className="w-4 h-4" />
           </>
         )}
       </button>
