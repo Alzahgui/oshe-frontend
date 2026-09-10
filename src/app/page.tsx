@@ -223,7 +223,7 @@ export default function Home() {
                 className="w-8 h-8 rounded-lg object-cover flex-shrink-0"
               />
               <div>
-                <span className="font-extrabold text-[1rem] tracking-tight block leading-tight" style={{ color: navy }}>{settings?.org_name ?? "Манош"}</span>
+                <span className="font-extrabold text-[1rem] tracking-tight block leading-tight" style={{ color: navy }}>{settings?.org_name ?? ""}</span>
                 <span className="text-[0.55rem] font-medium tracking-wider block leading-tight uppercase" style={{ color: "#6B7C93" }}>{settings?.org_full_name ?? "Монголын хөдөлмөрийн холбоо"}</span>
               </div>
             </Link>
@@ -983,8 +983,8 @@ export default function Home() {
                   <Shield className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <div className="font-extrabold text-[1.1rem] text-white">{settings?.org_name ?? "Манош"}</div>
-                  <div className="text-[0.6rem] font-medium tracking-wider uppercase" style={{ color: "rgba(255,255,255,0.4)" }}>{settings?.org_full_name ?? "Монголын хөдөлмөрийн холбоо"}</div>
+                  <div className="font-extrabold text-[1.1rem] text-white">{settings?.org_name ?? ""}</div>
+                  <div className="text-[0.6rem] font-medium tracking-wider uppercase" style={{ color: "rgba(255,255,255,0.4)" }}>{settings?.org_full_name ?? ""}</div>
                 </div>
               </div>
               <p className="mb-6 text-[0.85rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{settings?.org_tagline ?? "Монгол улсын хөдөлмөрийн аюулгүй байдал, эрүүл ахуйн үндэсний байгууллага — ажилчдыг хамгаалж, бүх салбарт илүү аюулгүй ажлын байр бий болгоход зориулагдсан."}</p>
@@ -1025,7 +1025,7 @@ export default function Home() {
         {/* Bottom bar */}
         <div className="px-4 py-5" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-[0.78rem]" style={{ color: "rgba(255,255,255,0.3)" }}>{settings?.footer_copyright ?? "© 2024 YOSH — Монголын Үндэсний Хөдөлмөрийн Аюулгүй Байдал, Эрүүл Ахуйн Холбоо. Бүх эрх хуулиар хамгаалагдсан."}</p>
+            <p className="text-[0.78rem]" style={{ color: "rgba(255,255,255,0.3)" }}>{settings?.footer_copyright ?? ""}</p>
             <div className="flex items-center gap-2 flex-wrap">
               {(settings?.footer_badges ?? "").split(",").map((badge) => (
                 <span key={badge} className="px-2.5 py-1 rounded-md text-[0.68rem] font-semibold" style={{ background: "rgba(3,173,180,0.12)", color: "rgba(3,173,180,0.8)", border: "1px solid rgba(3,173,180,0.2)" }}>{badge}</span>
