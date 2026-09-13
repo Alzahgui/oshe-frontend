@@ -3,6 +3,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import {
   Shield,
@@ -14,10 +15,26 @@ const teal = '#03ADB4'
 const pink = '#FD2EBB'
 const navy = '#0B1628'
 
-export default function LoginPage() {
+function RegisteredBanner() {
   const searchParams = useSearchParams()
-  const justRegistered = searchParams.get('registered') === '1'
+  if (searchParams.get('registered') !== '1') return null
 
+  return (
+    <div
+      className="flex items-center gap-2 rounded-xl px-4 py-3 text-[0.82rem] font-medium mb-6"
+      style={{
+        background: 'rgba(3,173,180,0.08)',
+        border: '1px solid rgba(3,173,180,0.25)',
+        color: '#027a80',
+      }}
+    >
+      <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+      Бүртгэл амжилттай үүслээ. Одоо нэвтэрнэ үү.
+    </div>
+  )
+}
+
+export default function LoginPage() {
   return (
     <div
       className="min-h-screen flex"
@@ -226,19 +243,9 @@ export default function LoginPage() {
           </div>
 
           {/* Registered successfully */}
-          {justRegistered && (
-            <div
-              className="flex items-center gap-2 rounded-xl px-4 py-3 text-[0.82rem] font-medium mb-6"
-              style={{
-                background: 'rgba(3,173,180,0.08)',
-                border: '1px solid rgba(3,173,180,0.25)',
-                color: '#027a80',
-              }}
-            >
-              <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-              Бүртгэл амжилттай үүслээ. Одоо нэвтэрнэ үү.
-            </div>
-          )}
+          <Suspense fallback={null}>
+            <RegisteredBanner />
+          </Suspense>
 
           {/* ── LoginForm component ── */}
           <LoginForm />
