@@ -2,9 +2,11 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import {
   Shield,
-  Building2, Users, Award, HardHat, ChevronRight,
+  Building2, Users, Award, HardHat, ChevronRight, CheckCircle2,
 } from 'lucide-react'
 import { LoginForm } from '@/components/LoginForm'
 
@@ -13,6 +15,9 @@ const pink = '#FD2EBB'
 const navy = '#0B1628'
 
 export default function LoginPage() {
+  const searchParams = useSearchParams()
+  const justRegistered = searchParams.get('registered') === '1'
+
   return (
     <div
       className="min-h-screen flex"
@@ -220,6 +225,21 @@ export default function LoginPage() {
             </p>
           </div>
 
+          {/* Registered successfully */}
+          {justRegistered && (
+            <div
+              className="flex items-center gap-2 rounded-xl px-4 py-3 text-[0.82rem] font-medium mb-6"
+              style={{
+                background: 'rgba(3,173,180,0.08)',
+                border: '1px solid rgba(3,173,180,0.25)',
+                color: '#027a80',
+              }}
+            >
+              <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+              Бүртгэл амжилттай үүслээ. Одоо нэвтэрнэ үү.
+            </div>
+          )}
+
           {/* ── LoginForm component ── */}
           <LoginForm />
 
@@ -235,10 +255,9 @@ export default function LoginPage() {
 
           {/* Register */}
           <p className="text-center text-[0.82rem] mt-6" style={{ color: '#6B7C93' }}>
-            Гишүүн болоогүй байна уу?{' '}
-            <a href="#" className="font-bold hover:underline" style={{ color: teal }}>
-              Гишүүнчлэлд хамрагдах <ChevronRight className="w-3 h-3 inline-block -mt-0.5" />
-            </a>
+            <Link href="/register" className="font-bold hover:underline" style={{ color: teal }}>
+              Бүртгүүлэх <ChevronRight className="w-3 h-3 inline-block -mt-0.5" />
+            </Link>
           </p>
         </div>
       </div>

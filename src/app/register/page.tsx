@@ -123,7 +123,7 @@ export default function RegisterPage() {
   const onSubmit = async (data: RegisterValues) => {
     setServerError('')
     try {
-      await api.post('/auth/register/', data)
+      await api.post('/api/register', data)
       router.push('/login?registered=1')
     } catch (err: unknown) {
       const resp = (err as { response?: { data?: { message?: string; errors?: Record<string, string[]> } } })
